@@ -1,3 +1,4 @@
+
 ALIGNMENT_MAPPING = {
     '0': 'neither the town nor mafia',
     '1': 'neither the town nor mafia',
@@ -13,7 +14,8 @@ ALIGNMENT_MAPPING = {
     'b': 'Town',
     'c': 'Town',
     'd': 'Town',
-    'e': 'Town'
+    'e': 'Town',
+    'f': 'Town'
 }
 
 COLOR_MAPPING = {
@@ -39,7 +41,7 @@ WINCON_3P_MAPPING = {
     '8': 'You win if you are the last remaining player alive, or when nothing can prevent this.',
     '9': 'You win if you and your lover are both alive at the end of the game.',
     'a': 'You win if you and your lover are both alive at the end of the game.',
-    'b': 'You win if you are alive at the en of the game.',
+    'b': 'You win if you are alive at the end of the game.',
     'c': 'You win if you are alive at the end of the game.',
     'd': 'You win if you are alive at the end of the game.',
     'e': 'You win when the mod is eliminated >:)'
@@ -81,15 +83,16 @@ THREE_P_ROLECARD_MAPPING = {
     'c': ['**[ACTIVE][2-SHOT]** Put on a bullet-proof vest. Under normal circumstances, you cannot be killed tonight.'],
     'd': ['**[ACTIVE][2-SHOT]** Put on a bullet-proof vest. Under normal circumstances, you cannot be killed tonight.'],
     'e': ['**[ACTIVE][2-SHOT]** Put on a bullet-proof vest. Under normal circumstances, you cannot be killed tonight.'],
+    'f': ['**[ACTIVE]** Poison a player of your choice. They will die if not healed within 2 days.']
 }
 
 TOWN_ROLECARD_MAPPING = {
     '0': ['**[ACTIVE]** Investigate the alignment of a player of your choice.'],
     '1': ['**[ACTIVE]** Investigate the alignment of a player of your choice.'],
-    '2': ['**[ACTIVE]** Investigate the alignment of a player of your choice.'],
+    '2': ['**[ACTIVE]** Watch a player of your choice. You will learn who visited them tonight.'],
     '3': ['**[ACTIVE]** Pick two players. You will learn if they are of the same alignment.'],
     '4': ['**[ACTIVE]** Pick two players. You will learn if they are of the same alignment.'],
-    '5': ['**[ACTIVE]** Heal a player of your choice. They will not die if they are attacked under normal circumstances.'],
+    '5': ['**[ACTIVE][1-SHOT]** Kill a player of your choice.'],
     '6': ['**[ACTIVE]** Heal a player of your choice. They will not die if they are attacked under normal circumstances.'],
     '7': ['**[ACTIVE]** Heal a player of your choice. They will not die if they are attacked under normal circumstances.'],
     '8': ['**[ACTIVE][1-SHOT]** Reveal all visits that took place during the night on the next Start of the Day post.'],
@@ -104,9 +107,8 @@ MIXED_ROLECARD_MAPPING = {
     '0': ['**[ACTIVE]** Roleblock a player of your choice, preventing them from using any active abilities for the night.'],
     '1': ['**[ACTIVE]** Roleblock a player of your choice, preventing them from using any active abilities for the night.'],
     '2': ['**[ACTIVE]** Redirect a player of your choice, making them target another player of your choice instead.'],
-    '3': ['**[ACTIVE]** Redirect a player of your choice, making them target another player of your choice instead.'],
+    '3': ['**[ACTIVE]** Switch any two players of your choice. Abilities targeting a switched player will target the other player instead.'],
     '4': ['**[ACTIVE][1-SHOT]** Kill a player of your choice.'],
-    '5': ['**[ACTIVE][1-SHOT]** Kill a player of your choice.'],
     '6': ['**[ACTIVE][2-SHOT]** Stay on alert, killing any players that visit you during the night.'],
     '7': ['**[ACTIVE][2-SHOT]** Stay on alert, killing any players that visit you during the night.'],
     '8': ['**[ACTIVE][2-SHOT]** Hide in your quarters for the night, making all non-killing actions performed on you fail.'],

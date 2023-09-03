@@ -27,6 +27,11 @@ class Rolecard:
         """.replace('the **neither the town nor mafia**', '**neither the town nor mafia**')
 
 
+SPECIAL_DERG_ROLECARDS = {
+    '83221441': Rolecard(win_con=WINCON_MAPPING['Town'], alignment='Town', abilities=[
+        '**[PASSIVE]** You are an innocent patootie, arent you? The mod will confirm that you are aligned with the town at the start of Day 1.',
+        '**[PASSIVE]** Your googly eyes are perfect. Who would want to kill a dragon with such magnificent eyes? You are immune to all kills.'])
+}
 DRAGON_ID_PAT = re.compile(r'flightrising.com/dragon/(\d{1,9})')
 
 
@@ -39,19 +44,27 @@ def get_dragon_rolecard(link) -> Embed:
     eighth digit: is amnesiac (if alignment = 3p)?
     """
     if not link:
-        return error_embed('Please include a link to the dragon!\n\nExample:\n`/rolecard https://www1.flightrising.com/dragon/[dragonid]`')
+        return error_embed(
+            'Please include a link to the dragon!\n\nExample:\n`/rolecard https://www1.flightrising.com/dragon/[dragonid]`')
     dragon_id = DRAGON_ID_PAT.findall(link)
     if len(dragon_id) != 1:
         return error_embed('The link is invalid. Please include a link to the dragon!')
     dragon_id = dragon_id[0]
+
+    if dragon_id in SPECIAL_DERG_ROLECARDS:
+        special_rolecard = SPECIAL_DERG_ROLECARDS[dragon_id]
+        return rolecard_embed(
+            rolecard=f'{special_rolecard.to_string()}\n\n*This rolecard was generated for dragon [{dragon_id}]({link}).*',
+            color=COLOR_MAPPING[special_rolecard.alignment])
+
     id_hash = hashlib.sha1(dragon_id.encode('utf-8')).hexdigest()[:8]
 
     alignment = ALIGNMENT_MAPPING[id_hash[0]]
     rolecard = Rolecard(
         alignment=alignment,
         win_con=WINCON_MAPPING[alignment],
-        abilities=[]
-    )
+        abilities=[])
+
     if alignment == 'neither the town nor mafia':
         rolecard.win_con = WINCON_3P_MAPPING[id_hash[1]]
 
@@ -65,7 +78,7 @@ def get_dragon_rolecard(link) -> Embed:
     if alignment == 'neither the town nor mafia':
         if id_hash[7] in {'1', '2'}:
             rolecard.abilities = ['**[ACTIVE]** Choose a dead player, inheriting their abililites and win condition.']
-            rolecard.wincon = 'You win if you achieve the win condition of the player you inherit it from.'
+            rolecard.win_con = 'You win if you achieve the win condition of the player you inherit it from.'
 
     if len(rolecard.abilities) == 0:
         rolecard.abilities.append('You have no special abilities. Your power is in your voice and your vote.')
@@ -80,4 +93,4 @@ def get_dragon_rolecard(link) -> Embed:
 
 
 if __name__ == '__main__':
-    get_dragon_rolecard('https://www1.flightrising.com/dragon/84925932')
+    get_dragon_rolecard('https://www1.flightrising.com/dragon/61218726')
