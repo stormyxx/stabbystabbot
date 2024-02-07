@@ -1,16 +1,17 @@
-from dataclasses import dataclass
-from typing import List, Tuple
-import re
+from attrs import define
 import hashlib
+import re
+from typing import List
 
+from attrs import define
 from flask_discord_interactions import Embed
 
 from embeds import rolecard_embed, error_embed
 from rolecard_mappings import ALIGNMENT_MAPPING, WINCON_MAPPING, WINCON_3P_MAPPING, ALIGNMENT_ROLECARD_MAPPING, \
-    MIXED_ROLECARD_MAPPING, COLOR_MAPPING, MISC_MAPPING
+    MIXED_ROLECARD_MAPPING, COLOR_MAPPING, MISC_MAPPING, ABILITY_ENHANCER_MAPPING
 
 
-@dataclass
+@define
 class Rolecard:
     win_con: str
     alignment: str
@@ -82,6 +83,8 @@ def get_dragon_rolecard(link) -> Embed:
 
     if len(rolecard.abilities) == 0:
         rolecard.abilities.append('You have no special abilities. Your power is in your voice and your vote.')
+    else:
+        rolecard.abilities += ABILITY_ENHANCER_MAPPING.get(id_hash[5], [])
 
     rolecard.abilities = sorted(list(set(rolecard.abilities)))  # sort & remove duplicates
     if rolecard.alignment == 'Mafia':
